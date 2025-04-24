@@ -6,10 +6,16 @@ I have temporarily selected the Virtual Library option for the task
 
 Members of the team are:
 
-Reed Marchman
+Reed Marchman 
 
 Tyrone Beladja
 
 Jenny Tonetti
 
 Gina Valdez
+
+
+Classes for Virtual Library Project:
+Reed and Tyrone: Library Class
+Jenny: Books Class and Use Library Class
+Gina: Member Class
