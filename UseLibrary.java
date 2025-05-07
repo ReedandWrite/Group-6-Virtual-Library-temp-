@@ -96,7 +96,13 @@ public class UseLibrary {
     }
     
     private static void addUser() {
-
+        System.out.print("Enter user name: ");
+        String userName = scanner.nextLine();
+        
+        User newUser = new User(userName);
+        library.addUser(newUser);
+        System.out.println("User added successfully: " + userName + " (Book limit: 5)");
+    }
     
     private static void checkoutBook() {
         System.out.print("Enter user name: ");
