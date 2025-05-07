@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class UseLibrary {
     private static Library library = new Library();
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner();
     
     public static void main(String[] args) {
         boolean running = true;
         
-        System.out.println("Welcome to the Group 6 Virtual Library!");
+        System.out.println("Welcome to the Group 6 Library!");
         
         while (running) {
             displayMenu();
@@ -19,7 +19,7 @@ public class UseLibrary {
                     addBook();
                     break;
                 case 2:
-                    addUser();
+                    addPerson();
                     break;
                 case 3:
                     checkoutBook();
@@ -37,7 +37,7 @@ public class UseLibrary {
                     viewAllUsers();
                     break;
                 case 8:
-                    deleteUser();
+                    deletePerson();
                     break;
                 case 9:
                     running = false;
@@ -69,11 +69,11 @@ public class UseLibrary {
     private static int getUserChoice() {
         if (scanner.hasNextInt()) {
             int choice = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
             return choice;
         } else {
             scanner.nextLine(); 
-            return -1; 
+            return -1;
         }
     }
     
@@ -84,49 +84,29 @@ public class UseLibrary {
         System.out.print("Enter book ID: ");
         if (!scanner.hasNextInt()) {
             System.out.println("Invalid book ID. Please enter a number.");
-            scanner.nextLine(); 
-            return;
-        }
-        int bookID = scanner.nextInt();
-        scanner.nextLine(); 
-        
-        Books newBook = new Books(bookName, bookID, "Available");
-        library.addBook(newBook);
-        System.out.println("Book added successfully: " + bookName);
-    }
-    
-    private static void addUser() {
-        System.out.print("Enter user name: ");
-        String userName = scanner.nextLine();
-        
-        User newUser = new User(userName);
-        library.addUser(newUser);
-        System.out.println("User added successfully: " + userName + " (Book limit: 5)");
-    }
-    
-    private static void checkoutBook() {
-        System.out.print("Enter user name: ");
-        String userName = scanner.nextLine();
-        
-        System.out.print("Enter book ID: ");
-        if (!scanner.hasNextInt()) {
-            System.out.println("Invalid book ID. Please enter a number.");
-            scanner.nextLine(); 
+            scanner.nextLine();
             return;
         }
         int bookID = scanner.nextInt();
         scanner.nextLine();
         
-        if (library.checkoutBook(userName, bookID)) {
-            System.out.println("Book checked out successfully!");
-        } else {
-            System.out.println("Unable to checkout book. Check if the user exists, book is available, or user hasn't reached their limit.");
-        }
+        Book newBook = new Book(bookName, bookID, "Available");
+        library.addBook(newBook);
+        System.out.println("Book added successfully: " + bookName);
     }
     
-    private static void returnBook() {
+    private static void addPerson() {
         System.out.print("Enter user name: ");
-        String userName = scanner.nextLine();
+        String personName = scanner.nextLine();
+        
+        Person newPerson = new Person(personName);
+        library.addPerson(newPerson);
+        System.out.println("User added successfully: " + personName + " (Book limit: 5)");
+    }
+    
+    private static void checkoutBook() {
+        System.out.print("Enter user name: ");
+        String personName = scanner.nextLine();
         
         System.out.print("Enter book ID: ");
         if (!scanner.hasNextInt()) {
@@ -137,7 +117,27 @@ public class UseLibrary {
         int bookID = scanner.nextInt();
         scanner.nextLine();
         
-        if (library.checkinBook(userName, bookID)) {
+        if (library.checkoutBook(personName, bookID)) {
+            System.out.println("Book checked out successfully!");
+        } else {
+            System.out.println("Unable to checkout book. Check if the user exists, book is available, or user hasn't reached their limit of 5 books.");
+        }
+    }
+    
+    private static void returnBook() {
+        System.out.print("Enter user name: ");
+        String personName = scanner.nextLine();
+        
+        System.out.print("Enter book ID: ");
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid book ID. Please enter a number.");
+            scanner.nextLine();
+            return;
+        }
+        int bookID = scanner.nextInt();
+        scanner.nextLine();
+        
+        if (library.checkinBook(personName, bookID)) {
             System.out.println("Book returned successfully!");
         } else {
             System.out.println("Unable to return book. Check if the user has this book checked out.");
@@ -148,13 +148,13 @@ public class UseLibrary {
         System.out.print("Enter search term: ");
         String searchTerm = scanner.nextLine();
         
-        ArrayList<Books> results = library.bookSearch(searchTerm);
+        ArrayList<Book> results = library.bookSearch(searchTerm);
         
         if (results.isEmpty()) {
             System.out.println("No books found matching: " + searchTerm);
         } else {
             System.out.println("\n===== SEARCH RESULTS =====");
-            for (Books book : results) {
+            for (Book book : results) {
                 System.out.println(book.getBookName() + " (ID: " + book.getBookID() + ") - " + book.getBookStatus());
             }
             System.out.println("=========================");
@@ -162,13 +162,13 @@ public class UseLibrary {
     }
     
     private static void viewAllBooks() {
-        ArrayList<Books> allBooks = library.getAllBooks();
+        ArrayList<Book> allBooks = library.getAllBooks();
         
         if (allBooks.isEmpty()) {
             System.out.println("No books in the library.");
         } else {
             System.out.println("\n===== ALL BOOKS =====");
-            for (Books book : allBooks) {
+            for (Book book : allBooks) {
                 System.out.println(book.getBookName() + " (ID: " + book.getBookID() + ") - " + book.getBookStatus());
             }
             System.out.println("====================");
@@ -181,14 +181,14 @@ public class UseLibrary {
         System.out.println("=========================");
     }
     
-    private static void deleteUser() {
+    private static void deletePerson() {
         System.out.print("Enter user name to delete: ");
-        String userName = scanner.nextLine();
+        String personName = scanner.nextLine();
         
-        if (library.deleteUser(userName)) {
-            System.out.println("User deleted successfully: " + userName);
+        if (library.deletePerson(personName)) {
+            System.out.println("User deleted successfully: " + personName);
         } else {
-            System.out.println("User not found: " + userName);
+            System.out.println("User not found: " + personName);
         }
     }
 }
