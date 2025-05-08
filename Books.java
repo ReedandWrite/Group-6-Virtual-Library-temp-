@@ -8,20 +8,21 @@ public class Books {
 
 	private String bookName;
 	private int bookID;
-	private String bookStatus;
+	private boolean borrowed;
+	
 
 	public Books(String bookName, int bookID, String bookStatus) { //non-default constructor
 		super();
 		this.bookName = bookName;
 		this.bookID = bookID;
-		this.bookStatus = bookStatus;
+		
 	}
 
 	public Books() { //default constructor
 		super();
 		this.bookName = null;
 		this.bookID = 0;
-		this.bookStatus = null;
+	
 	}
 	
 	protected String getBookName() {
@@ -31,7 +32,7 @@ public class Books {
 	protected void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-
+	
 	protected int getBookID() {
 		return bookID;
 	}
@@ -39,14 +40,15 @@ public class Books {
 	protected void setBookID(int bookID) {
 		this.bookID = bookID;
 	}
-	protected String getBookStatus() {
-		return bookStatus;
+	public boolean isBorrowed() { //returns value of true if book is unavailable
+		return borrowed;
 	}
-
-	protected void setBookStatus(String bookStatus) {
-		this.bookStatus = bookStatus;
+	public void borrowed() { //changes book status to unavailable
+		borrowed = true;
 	}
-	public boolean isAvailable() { //checks inventory to see if a book is available to check out
-		return true;
+	public void returned() { //changes book status to available
+		borrowed = false;
 	}
-}
+	public void getName() {  //outputs title of book
+		System.out.println(bookName);
+	}
