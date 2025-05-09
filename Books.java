@@ -8,7 +8,7 @@ public class Book {
 
 	private String bookName;
 	private int bookID;
-	String bookStatus;
+	private String bookStatus;
 	private boolean borrowed;
 	
 
