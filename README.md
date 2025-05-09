@@ -22,3 +22,5 @@ Reed and Tyrone: Library Class
 Jenny: Books Class and Use Library Class
 
 Gina: Member Class
+
+The purpose of this project is to create a virtual library and implement a basic interface that performs some basic functions such as: creating objects for people and books, borrowing and returning books, etc.
