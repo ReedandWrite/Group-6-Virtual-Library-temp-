@@ -1,6 +1,6 @@
 /* Project Name: Virtual Library
  * Author: Jenny Tonetti
- * Date: 5/8/2025
+ * Date: 4/25/2025
  * Description: This class is used to add books to the virtual library and 
  * return the availability of each book.
  */
@@ -8,11 +8,11 @@ public class Book {
 
 	private String bookName;
 	private int bookID;
-	private String bookStatus;
+	String bookStatus;
 	private boolean borrowed;
 	
 
-	public Book(String bookName, int bookID, String bookStatus) { //non-default constructor
+	public Book(String bookName, int bookID) { //non-default constructor
 		super();
 		this.bookName = bookName;
 		this.bookID = bookID;
@@ -40,6 +40,7 @@ public class Book {
 	protected void setBookID(int bookID) {
 		this.bookID = bookID;
 	}
+	
 	public void borrowed() { //changes book status to unavailable
 		borrowed = true;
 	}
@@ -53,3 +54,4 @@ public class Book {
 		return borrowed;
 	}
 }
+
