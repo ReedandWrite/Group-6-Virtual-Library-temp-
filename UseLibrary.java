@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class UseLibrary {
     private static Library library = new Library();
-    private static Scanner scanner = new Scanner();
+    private static Scanner scanner = new Scanner(System.in);
     
     public static void main(String[] args) {
         boolean running = true;
@@ -90,7 +90,7 @@ public class UseLibrary {
         int bookID = scanner.nextInt();
         scanner.nextLine();
         
-        Book newBook = new Book(bookName, bookID, "Available");
+        Book newBook = new Book(bookName, bookID);
         library.addBook(newBook);
         System.out.println("Book added successfully: " + bookName);
     }
@@ -169,7 +169,7 @@ public class UseLibrary {
         } else {
             System.out.println("\n===== ALL BOOKS =====");
             for (Book book : allBooks) {
-                System.out.println(book.getBookName() + " (ID: " + book.getBookID() + ") - " + book.getBookStatus());
+                System.out.println(book.getBookName() + " (ID: " + book.getBookID() + ")" + "Book checked out?: " + book.getBookStatus());
             }
             System.out.println("====================");
         }
